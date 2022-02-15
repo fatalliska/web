@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=5e0c46e6-fbd3-4502-9458-e93d06b81926&lang=ru_RU" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var myMap;
+        var multiRoute;
+        ymaps.ready(init);
+        function init(){
+            myMap = new ymaps.Map("map", {
+                center: [55.76, 37.64],
+                zoom: 12,
+                controls:['zoomControl', 'typeSelector']
+            }); }
+        function makeRoot(modeRoute) {
+            pointFrom = document.getElementById('text1').value;
+            pointTo = document.getElementById('text2').value;
+            var multiRoute = new ymaps.multiRouter.MultiRoute({   
+    // Точки маршрута. Точки могут быть заданы как координатами, так и адресом. 
+            referencePoints: [pointFrom, pointTo],
+            params: {
+        avoidTrafficJams: true,
+        routingMode: modeRoute
+    }
+}, {
+      // Автоматически устанавливать границы карты так,
+      // чтобы маршрут был виден целиком.
+      boundsAutoApply: true,
+      routeActiveStrokeWidth: 10,
+      routeActiveStrokeStyle: 'solid',
+      routeActiveStrokeColor: '#00F7FF'
+});
+
+// Добавление маршрута на карту.
+myMap.geoObjects.add(multiRoute);
+multiRoute.model.events.add('requestsuccess', function() {
+    var activeRoute = multiRoute.getActiveRoute();
+    activeRoute.baloon.open();
+    activeRoute.properties.get('distance').text;
+    activeRoute.properties.get('duration').text;
+})
+        }
+        function clearMap() {
+            myMap.geoObjects.removeAll();
+            multiRoute && myMap.geoObjects.remove(multiRoute);
+        }
+    </script>
+    <style>
+        html {
+            height: 100%
+        }
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="width: 100%; height: 100%"></div>
+    <input id="text1" type="text"/>
+    <input id="text2" type="text" />
+    <input type="button" value="Make route" onclick="makeRoot()">
+    <input type="button" value="Clear" onclick="clearMap()">
+</body>
+
+</html>
