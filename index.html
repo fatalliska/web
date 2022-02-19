@@ -15,9 +15,22 @@
                 zoom: 12,
                 controls:['zoomControl', 'typeSelector']
             }); }
-        function makeRoot(modeRoute) {
+        function makeRoot() {
             pointFrom = document.getElementById('text1').value;
             pointTo = document.getElementById('text2').value;
+            selected = document.getElementById('selectID');
+            modeRoute = selected.options[selected.selectedIndex].value;
+
+            if (pointFrom == '') {
+                document.getElementById('text1').focus;
+                alert('Забыли указать точку старта');
+                return;
+            }
+            if (pointTo == '') {
+                document.getElementById('text1').focus;
+                alert('Забыли указать точку прибытия');
+                return;
+            }
             var multiRoute = new ymaps.multiRouter.MultiRoute({   
     // Точки маршрута. Точки могут быть заданы как координатами, так и адресом. 
             referencePoints: [pointFrom, pointTo],
@@ -57,15 +70,56 @@ multiRoute.model.events.add('requestsuccess', function() {
             margin: 0;
             padding: 0;
         }
+        #block {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            text-align: center;
+        }
+        #text1, #text2 {
+            padding: 2;
+            height: 2%;
+            width: 35%;
+            background-color: rgb(215, 245, 170);
+            border: solid 1px black;
+        }
+        .btn {
+            background-color: aliceblue;
+            height: 3%;
+            border-radius: 4px;
+            width: 14%;
+        }
+        .btn:hover {
+            background-color: rgb(169, 238, 198);
+            font-style: italic;
+            box-shadow: 0 10px 20px rgb(152, 236, 187);
+        }
+        .btn:active {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgb(119, 189, 148);
+        }
     </style>
 </head>
 
 <body>
-    <div id="map" style="width: 100%; height: 100%"></div>
-    <input id="text1" type="text"/>
-    <input id="text2" type="text" />
-    <input type="button" value="Make route" onclick="makeRoot()">
-    <input type="button" value="Clear" onclick="clearMap()">
+    <div id="block">
+    <input id="text1" type="text" placeholder="Откуда" required/>
+    <input id="text2" type="text" placeholder="Куда" required/>
+    <select id="selectID">
+
+        <option value=”masstransit”>На общественном транспорте</option>
+        
+        <option value=”auto”>На машине</option>
+        
+        <option value=”pedestrian”>Пешком</option>
+
+        <option value=”bicycle”>На велосипеде</option>
+        
+        </select>
+    <input class='btn' type="button" value="Make route" onclick="makeRoot()">
+    <input class='btn' type="button" value="Clear" onclick="clearMap()">
+    </div>
+    <div id="map" style="width: 100%; height: 95%"></div>
 </body>
 
 </html>
