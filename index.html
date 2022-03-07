@@ -14,44 +14,44 @@
 <fieldset>
 <legend>Контактная информация</legend>
 <label for="name">ФИО <em>*</em></label>
-<input type="text" placeholder="Иванов Иваныч Саныч" autofocus required><br>
+<input type="text" id="name" name="name" placeholder="Иванов Иваныч Саныч" autofocus required><br>
 <label for="name">Телефон</label>
-<input type="text" placeholder="8 800 555 3535"><br>
+<input type="text" id="phone" name="phone" placeholder="8 800 555 3535"><br>
 <label for="name">email <em>*</em></label>
-<input type="text" placeholder="email@yandex.ru"><br>
+<input type="text" id="email" name="email" placeholder="email@yandex.ru"><br>
 </fieldset>
 
 <fieldset>
     <legend>Данные для проверки</legend>
     <label for="gender">Пол <em>*</em></label>
-    <select id="gender">
+    <select id="gender" name="gender">
         <option value="female">female</option>
         <option value="male">male</option>
     </select><br>
     <label for="birthDate">Дата рождения <em>*</em></label>
-    <input type="date" id="birtDate" value="1990-01-01" required><br>
+    <input type="date" id="birthDate" name="birthDate" value="1990-01-01" required><br>
     <label for="periodLife">Сколько лет проживаете в своем регионе <em>*</em></label>
-    <input type="number" id="periodLife" min="0" max="100" value="10" required><br>
+    <input type="number" id="periodLife" name="periodLife" min="0" max="100" value="10" required><br>
     <label for="profession">Профессия <em>*</em></label>
-    <select id="profession">
+    <select id="profession" name="profession">
         <option value="high">Водитель, полицейский или пилот</option>
         <option value="low">Программист или преподаватель</option>
         <option value="other">Другое</option>
-    </select>
-    <select id="sphere">
+    </select><br>
+    <select id="sphere" name="sphere">
         <option value="public">Работаю на государство</option>
         <option value="other">Не работаю на государство</option>
     </select><br>
     <label for="periodWork">Сколько лет работаете на последнем месте работы <em>*</em></label>
-    <input type="number" id="periodWork" min="0" max="70" value="5" required><br>
+    <input type="number" id="periodWork" name="periodWork" min="0" max="70" value="5" required><br>
     <label for="account">Наличие банковского счета <em>*</em></label>
-    <input type="checkbox" id="account">
+    <input type="checkbox" id="account" name="account"><br>
     <label for="estate">Наличие недвижимости <em>*</em></label>
-    <input type="checkbox" id="estate">
+    <input type="checkbox" id="estate" name="estate"><br>
     <label for="insurance">Наличие страховки <em>*</em></label>
-    <input type="checkbox" id="insurance">
+    <input type="checkbox" id="insurance" name="insurance">
 </fieldset>
-<button class="custom-btn btn-1">Отправить</button>
+<input type="submit" class="custom-btn btn-1" value="Отправить">
     </form>
 </body>
 </html>
